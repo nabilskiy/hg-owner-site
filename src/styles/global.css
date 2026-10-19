@@ -1,0 +1,59 @@
+@import 'tailwindcss';
+
+@theme {
+  /* TODO: confirm with designer — sampled from design/Home - v3.pdf */
+  /* Sampled fill is #f06434. Darkened so orange type clears WCAG AA on white and on the surface tint. */
+  --color-primary: #c74231;
+  --color-navy: #182c50;
+  --color-navy-deep: #00183c;
+  --color-surface: #f5f7fa;
+  --color-muted: #3e4c63;
+  --color-line: #dde2ea;
+  --color-success: #146c3a;
+  --color-warning: #8a5a00;
+  --color-info: #0b5f73;
+  --color-neutral-status: #3e4c63;
+  --color-success-soft: #e5f6ec;
+  --color-warning-soft: #fff4d6;
+  --color-info-soft: #e5f6fb;
+  --color-neutral-soft: #eef1f6;
+  --color-accent: #0090b0;
+
+  --font-sans: 'Outfit', ui-sans-serif, system-ui, sans-serif;
+  --color-ink: #3b342e;
+
+  --radius-md: 0.75rem;
+  --radius-lg: 1.25rem;
+  --radius-pill: 999px;
+
+  --shadow-card: 0 8px 24px rgb(24 44 80 / 0.08);
+
+  /* 72rem / 1152px on the 1440px desktop canvas */
+  --container-page: 72rem;
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    overflow-x: clip;
+    background-color: var(--color-white);
+    color: var(--color-navy);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+}

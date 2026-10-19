@@ -1,0 +1,64 @@
+---
+import { locales, type Locale } from '@/i18n/config';
+import { localizedPath, useTranslations } from '@/i18n/utils';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const common = t('common');
+const nav = t('nav');
+const labels: Record<Locale, string> = {
+  en: common.english,
+  hr: common.croatian,
+};
+---
+
+<details class="relative">
+  <summary class="flex min-h-11 cursor-pointer list-none items-center gap-1.5 text-[15px] font-medium text-ink marker:content-none [&::-webkit-details-marker]:hidden">
+    <span class="sr-only">{nav.language}</span>
+    <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+      <circle cx="8" cy="8" r="6.25" fill="none" stroke="currentColor" stroke-width="1.2"></circle>
+      <ellipse
+        cx="8"
+        cy="8"
+        rx="2.6"
+        ry="6.25"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.2"
+      ></ellipse>
+      <path d="M2 8h12" stroke="currentColor" stroke-width="1.2"></path>
+    </svg>
+    {labels[lang]}
+    <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">
+      <path
+        d="M2.5 4.5 6 8l3.5-3.5"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      ></path>
+    </svg>
+  </summary>
+  <ul class="absolute right-0 z-50 mt-1 min-w-24 rounded-xl bg-white p-1 shadow-card ring-1 ring-line">
+    {locales.map((locale) => (
+      <li>
+        <a
+          href={localizedPath(locale, '/')}
+          hreflang={locale}
+          aria-current={locale === lang ? 'true' : undefined}
+          class:list={[
+            'flex min-h-11 items-center rounded-lg px-3 text-[15px] font-medium',
+            locale === lang ? 'text-ink' : 'text-muted',
+          ]}
+        >
+          {labels[locale]}
+        </a>
+      </li>
+    ))}
+  </ul>
+</details>

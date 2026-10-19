@@ -1,0 +1,32 @@
+---
+import Button from '@/components/ui/Button.astro';
+import Container from '@/components/ui/Container.astro';
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+import { appUrl } from '@/config/site';
+import type { Locale } from '@/i18n/config';
+import { localizedPath, useTranslations } from '@/i18n/utils';
+import GettingStartedSteps from '@/sections/getting-started/islands/GettingStartedSteps';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const section = useTranslations(lang)('gettingStarted');
+---
+
+<section id="getting-started" class="bg-surface py-12 md:py-20">
+  <Container>
+    <SectionHeading eyebrow={section.eyebrow} title={section.title} />
+    {/* TODO: implement visual */}
+    <div class="mt-8">
+      <GettingStartedSteps client:visible label={section.stepsLabel} steps={section.steps} />
+    </div>
+    <div class="mt-8 flex flex-wrap gap-3">
+      <Button href={appUrl()}>{section.startSelling}</Button>
+      <Button href={localizedPath(lang, '/#ecosystem')} variant="secondary">
+        {section.explore}
+      </Button>
+    </div>
+  </Container>
+</section>

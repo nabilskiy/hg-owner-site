@@ -1,0 +1,98 @@
+---
+import HeaderLanguage from '@/components/layout/HeaderLanguage.astro';
+import { appUrl, navItems, siteName } from '@/config/site';
+import { locales, type Locale } from '@/i18n/config';
+import { localizedPath, useTranslations } from '@/i18n/utils';
+import MobileMenu from '@/islands/MobileMenu';
+import logoUrl from '../../../design/logo.svg?url';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const nav = t('nav');
+const common = t('common');
+const labels: Record<(typeof navItems)[number]['key'], string> = {
+  product: nav.product,
+  solutions: nav.solutions,
+  marketplace: nav.marketplace,
+  pricing: nav.pricing,
+  resources: nav.resources,
+};
+const languageLabels: Record<Locale, string> = {
+  en: common.english,
+  hr: common.croatian,
+};
+
+function hrefFor(path: string): string {
+  return path.startsWith('http') ? path : localizedPath(lang, path);
+}
+---
+
+<header class="sticky top-0 z-40 bg-white">
+  <div class="relative mx-auto flex h-20 w-full max-w-[1440px] items-center px-[18px] lg:px-[60px]">
+    <a href={localizedPath(lang, '/')} class="relative z-10 shrink-0">
+      <img src={logoUrl} width="176" height="35" alt={siteName} class="h-[35px] w-auto" />
+    </a>
+    <nav aria-label={nav.menu} class="absolute inset-x-0 hidden justify-center lg:flex">
+      <ul class="flex items-center gap-9">
+        {navItems.map((item) => (
+          <li>
+            <a
+              href={hrefFor(item.href)}
+              class="inline-flex min-h-11 items-center gap-1 text-[15px] font-medium whitespace-nowrap text-ink"
+            >
+              {labels[item.key]}
+              {item.disclosure ? (
+                <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">
+                  <path
+                    d="M2.5 4.5 6 8l3.5-3.5"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              ) : null}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+    <div class="relative z-10 ml-auto flex items-center gap-3 lg:gap-4">
+      <a
+        href={appUrl()}
+        class="hidden h-11 items-center rounded-full border border-ink px-5 text-[15px] font-medium text-ink lg:inline-flex"
+      >
+        {nav.forTravelers}
+      </a>
+      <HeaderLanguage lang={lang} />
+      <MobileMenu
+        client:load
+        logoSrc={logoUrl}
+        logoAlt={siteName}
+        openLabel={nav.openMenu}
+        closeLabel={nav.closeMenu}
+        menuLabel={nav.menu}
+        items={navItems.map((item) => ({
+          href: hrefFor(item.href),
+          label: labels[item.key],
+          external: item.href.startsWith('http'),
+          disclosure: item.disclosure,
+        }))}
+        forTravelersLabel={nav.forTravelers}
+        forTravelersHref={appUrl()}
+        languageLabel={nav.language}
+        languages={locales.map((locale) => ({
+          href: localizedPath(locale, '/'),
+          label: languageLabels[locale],
+          current: locale === lang,
+          hreflang: locale,
+        }))}
+      />
+    </div>
+  </div>
+</header>

@@ -1,0 +1,26 @@
+---
+interface Props {
+  label: string;
+  class?: string;
+}
+
+const { label, class: className = 'inline-flex' } = Astro.props;
+---
+
+<button
+  type="button"
+  class:list={[
+    'h-[60px] items-center gap-3 rounded-full bg-white pr-5 pl-2 text-[15px] font-medium text-ink shadow-[0_8px_24px_rgb(59_52_46/0.12)]',
+    className,
+  ]}
+>
+  <span class="grid size-11 shrink-0 place-items-center rounded-full bg-[#bb4d00]">
+    <svg width="12" height="14" viewBox="0 0 12 14" aria-hidden="true">
+      <path
+        d="M11 6.268c.667.385.667 1.348 0 1.732l-9 5.33C1.333 13.447.5 12.966.5 12.196V1.804C.5 1.034 1.333.553 2 .938l9 5.33Z"
+        fill="white"
+      ></path>
+    </svg>
+  </span>
+  {label}
+</button>

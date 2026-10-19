@@ -1,0 +1,34 @@
+---
+import Container from '@/components/ui/Container.astro';
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+import { appUrl } from '@/config/site';
+import type { Locale } from '@/i18n/config';
+import { useTranslations } from '@/i18n/utils';
+import EcosystemTabs from '@/sections/ecosystem/islands/EcosystemTabs';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const section = useTranslations(lang)('ecosystem');
+const tabs = section.tabs.map((tab) => ({
+  id: tab.id,
+  label: tab.label,
+  title: tab.title ?? '',
+  body: tab.body ?? '',
+  points: tab.points ?? [],
+  cta: tab.body ? section.cta : '',
+  ctaHref: appUrl(),
+}));
+---
+
+<section id="ecosystem" class="py-12 md:py-20">
+  <Container>
+    <SectionHeading eyebrow={section.eyebrow} title={section.title} />
+    {/* TODO: implement visual */}
+    <div class="mt-8">
+      <EcosystemTabs client:visible label={section.tabsLabel} tabs={tabs} />
+    </div>
+  </Container>
+</section>

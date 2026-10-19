@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm lint
+      - run: pnpm check
+        env:
+          ASTRO_TELEMETRY_DISABLED: '1'
+      - run: pnpm build
+        env:
+          ASTRO_TELEMETRY_DISABLED: '1'
+          PUBLIC_SITE_URL: https://example.com
+          PUBLIC_APP_URL: https://example.com/app
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm test:e2e
+        env:
+          CI: 'true'
+          ASTRO_TELEMETRY_DISABLED: '1'
+      - uses: browser-actions/setup-chrome@v1
+      - run: pnpm lhci
+        env:
+          ASTRO_TELEMETRY_DISABLED: '1'

@@ -1,0 +1,35 @@
+# local design exports and notes
+design/
+docs/
+
+# dependencies
+node_modules/
+
+# build
+dist/
+.astro/
+infra/cdk.out/
+
+# env
+.env
+.env.*
+!.env.example
+
+# logs and caches
+npm-debug.log*
+pnpm-debug.log*
+.lighthouseci/
+
+# playwright
+test-results/
+playwright-report/
+blob-report/
+
+# os / editor
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# typescript
+*.tsbuildinfo

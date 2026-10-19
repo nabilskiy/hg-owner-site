@@ -1,0 +1,52 @@
+---
+import Footer from '@/components/layout/Footer.astro';
+import Header from '@/components/layout/Header.astro';
+import { isLocale, locales } from '@/i18n/config';
+import { useTranslations } from '@/i18n/utils';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import BeyondBasics from '@/sections/beyond-basics/BeyondBasics.astro';
+import Ecosystem from '@/sections/ecosystem/Ecosystem.astro';
+import Faq from '@/sections/faq/Faq.astro';
+import FinalCta from '@/sections/final-cta/FinalCta.astro';
+import GettingStarted from '@/sections/getting-started/GettingStarted.astro';
+import Hero from '@/sections/hero/Hero.astro';
+import Solutions from '@/sections/solutions/Solutions.astro';
+import SoundFamiliar from '@/sections/sound-familiar/SoundFamiliar.astro';
+import Testimonials from '@/sections/testimonials/Testimonials.astro';
+import WhatChanges from '@/sections/what-changes/WhatChanges.astro';
+
+export function getStaticPaths() {
+  return locales.map((lang) => ({ params: { lang } }));
+}
+
+const lang = Astro.params.lang;
+if (!isLocale(lang)) {
+  throw new Error('Unsupported locale');
+}
+
+const t = useTranslations(lang);
+const faqItems = t('faq').items.map((item) => ({
+  q: item.q,
+  a: 'a' in item ? item.a : undefined,
+}));
+---
+
+<BaseLayout
+  lang={lang}
+  title={t('hero').title}
+  description={t('common').metaDescription}
+  faqItems={faqItems}
+>
+  <Header slot="header" lang={lang} />
+  <Hero lang={lang} />
+  <SoundFamiliar lang={lang} />
+  <WhatChanges lang={lang} />
+  <Ecosystem lang={lang} />
+  <Solutions lang={lang} />
+  <BeyondBasics lang={lang} />
+  <GettingStarted lang={lang} />
+  <Testimonials lang={lang} />
+  <Faq lang={lang} />
+  <FinalCta lang={lang} />
+  <Footer slot="footer" lang={lang} />
+</BaseLayout>

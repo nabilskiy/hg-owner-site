@@ -1,0 +1,88 @@
+---
+import '@/styles/global.css';
+import '@fontsource/outfit/latin-400.css';
+import '@fontsource/outfit/latin-ext-400.css';
+import '@fontsource/outfit/latin-500.css';
+import '@fontsource/outfit/latin-ext-500.css';
+import '@fontsource/outfit/latin-600.css';
+import '@fontsource/outfit/latin-ext-600.css';
+import outfit500 from '@fontsource/outfit/files/outfit-latin-500-normal.woff2?url';
+import CookieSettings from '@/islands/CookieSettings';
+import { siteName } from '@/config/site';
+import type { Locale } from '@/i18n/config';
+import { useTranslations } from '@/i18n/utils';
+import {
+  absoluteUrl,
+  faqPageJsonLd,
+  localeAlternates,
+  organizationJsonLd,
+  type FaqItem,
+} from '@/lib/seo';
+
+interface Props {
+  lang: Locale;
+  title: string;
+  description: string;
+  faqItems?: readonly FaqItem[];
+}
+
+const { lang, title, description, faqItems = [] } = Astro.props;
+const t = useTranslations(lang);
+const common = t('common');
+const footer = t('footer');
+const site = Astro.site ?? new URL('http://localhost:4321');
+const canonical = absoluteUrl(site, Astro.url.pathname);
+const alternates = localeAlternates(site);
+const documentTitle = `${title} · ${siteName}`;
+const faqLd = faqPageJsonLd(faqItems);
+const ogLocale = lang === 'hr' ? 'hr_HR' : 'en_US';
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{documentTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {alternates.map((alternate) => (
+      <link rel="alternate" hreflang={alternate.hreflang} href={alternate.href} />
+    ))}
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={documentTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:locale:alternate" content={lang === 'hr' ? 'en_US' : 'hr_HR'} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href={outfit500} as="font" type="font/woff2" crossorigin />
+    <script type="application/ld+json" set:html={JSON.stringify(organizationJsonLd(site))} />
+    {faqLd ? <script type="application/ld+json" set:html={JSON.stringify(faqLd)} /> : null}
+  </head>
+  <body class="font-sans text-navy">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-white focus:px-4 focus:py-3"
+    >
+      {common.skipToContent}
+    </a>
+    <slot name="header" />
+    <main id="main">
+      <slot />
+    </main>
+    <slot name="footer" />
+    <CookieSettings
+      client:idle
+      lang={lang}
+      title={common.consentTitle}
+      description={common.consentDescription}
+      acceptAll={common.consentAccept}
+      reject={common.consentReject}
+      manage={footer.cookieSettings}
+      save={common.consentSave}
+      necessary={common.consentNecessary}
+      analytics={common.consentAnalytics}
+    />
+  </body>
+</html>

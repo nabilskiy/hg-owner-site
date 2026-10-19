@@ -1,0 +1,33 @@
+---
+import { defaultLocale, locales } from '@/i18n/config';
+import { localizedPath, useTranslations } from '@/i18n/utils';
+
+const t = useTranslations(defaultLocale);
+const common = t('common');
+const labels = {
+  en: common.english,
+  hr: common.croatian,
+} as const;
+---
+
+<!doctype html>
+<html lang={defaultLocale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <meta http-equiv="refresh" content={`0; url=${localizedPath(defaultLocale, '/')}`} />
+    <title>{t('hero').title}</title>
+    <link rel="canonical" href={localizedPath(defaultLocale, '/')} />
+  </head>
+  <body>
+    <p>{t('hero').title}</p>
+    <ul>
+      {locales.map((locale) => (
+        <li>
+          <a href={localizedPath(locale, '/')}>{labels[locale]}</a>
+        </li>
+      ))}
+    </ul>
+  </body>
+</html>

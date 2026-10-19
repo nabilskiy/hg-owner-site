@@ -1,0 +1,24 @@
+---
+import Container from '@/components/ui/Container.astro';
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+import type { Locale } from '@/i18n/config';
+import { useTranslations } from '@/i18n/utils';
+import SoundFamiliarCards from '@/sections/sound-familiar/islands/SoundFamiliarCards';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const section = useTranslations(lang)('soundFamiliar');
+---
+
+<section id="sound-familiar" class="py-12 md:py-20">
+  <Container>
+    <SectionHeading title={section.title} />
+    {/* TODO: implement visual */}
+    <div class="mt-8">
+      <SoundFamiliarCards client:visible cards={section.cards} />
+    </div>
+  </Container>
+</section>

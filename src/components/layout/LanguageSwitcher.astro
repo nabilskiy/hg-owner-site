@@ -1,0 +1,60 @@
+---
+import { locales, type Locale } from '@/i18n/config';
+import { localizedPath, useTranslations } from '@/i18n/utils';
+
+interface Props {
+  lang: Locale;
+  landmark?: boolean;
+}
+
+const { lang, landmark = true } = Astro.props;
+const t = useTranslations(lang);
+const common = t('common');
+const nav = t('nav');
+const labels: Record<Locale, string> = {
+  en: common.english,
+  hr: common.croatian,
+};
+---
+
+<div class="flex items-center gap-2 text-sm font-semibold">
+  {landmark ? (
+    <nav aria-label={nav.language}>
+      <ul class="flex items-center gap-2">
+        {locales.map((locale) => (
+          <li>
+            <a
+              href={localizedPath(locale, '/')}
+              hreflang={locale}
+              aria-current={locale === lang ? 'true' : undefined}
+              class:list={[
+                locale === lang ? 'text-navy' : 'text-muted',
+                'inline-flex min-h-11 items-center',
+              ]}
+            >
+              {labels[locale]}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  ) : (
+    <ul class="flex items-center gap-2">
+      {locales.map((locale) => (
+        <li>
+          <a
+            href={localizedPath(locale, '/')}
+            hreflang={locale}
+            aria-current={locale === lang ? 'true' : undefined}
+            class:list={[
+              locale === lang ? 'text-navy' : 'text-muted',
+              'inline-flex min-h-11 items-center',
+            ]}
+          >
+            {labels[locale]}
+          </a>
+        </li>
+      ))}
+    </ul>
+  )}
+</div>

@@ -1,0 +1,16 @@
+---
+interface Props {
+  tone?: 'light' | 'dark';
+}
+
+const { tone = 'light' } = Astro.props;
+---
+
+<div
+  class:list={[
+    'rounded-lg p-6 shadow-card',
+    tone === 'dark' ? 'bg-navy text-white' : 'bg-white text-navy ring-1 ring-line',
+  ]}
+>
+  <slot />
+</div>

@@ -1,0 +1,21 @@
+---
+interface Props {
+  eyebrow?: string;
+  title: string;
+  description?: string;
+  level?: 'h1' | 'h2';
+  align?: 'start' | 'center';
+}
+
+const { eyebrow, title, description, level = 'h2', align = 'start' } = Astro.props;
+const alignClass = align === 'center' ? 'text-center' : 'text-start';
+const Tag = level;
+---
+
+<div class:list={['flex flex-col gap-3', alignClass]}>
+  {eyebrow ? (
+    <p class="text-sm font-semibold tracking-wide text-muted uppercase">{eyebrow}</p>
+  ) : null}
+  <Tag class="text-3xl font-semibold text-balance text-navy md:text-5xl">{title}</Tag>
+  {description ? <p class="max-w-3xl text-base text-muted md:text-lg">{description}</p> : null}
+</div>

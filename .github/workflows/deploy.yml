@@ -1,0 +1,57 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*.*.*']
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ startsWith(github.ref, 'refs/tags/') && vars.AWS_ROLE_ARN_PRODUCTION || vars.AWS_ROLE_ARN_STAGING }}
+          aws-region: ${{ vars.AWS_REGION }}
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+        env:
+          ASTRO_TELEMETRY_DISABLED: '1'
+          PUBLIC_SITE_URL: ${{ startsWith(github.ref, 'refs/tags/') && vars.PUBLIC_SITE_URL_PRODUCTION || vars.PUBLIC_SITE_URL_STAGING }}
+          PUBLIC_APP_URL: ${{ vars.PUBLIC_APP_URL }}
+      - name: Publish to S3 and invalidate CloudFront
+        env:
+          BUCKET: ${{ startsWith(github.ref, 'refs/tags/') && vars.S3_BUCKET_PRODUCTION || vars.S3_BUCKET_STAGING }}
+          DISTRIBUTION: ${{ startsWith(github.ref, 'refs/tags/') && vars.CLOUDFRONT_DISTRIBUTION_ID_PRODUCTION || vars.CLOUDFRONT_DISTRIBUTION_ID_STAGING }}
+        run: |
+          set -eu
+          aws s3 sync dist/ "s3://${BUCKET}" \
+            --delete \
+            --exclude "*.html" \
+            --exclude "sitemap*.xml" \
+            --exclude "robots.txt" \
+            --cache-control "public, max-age=86400"
+          aws s3 sync dist/ "s3://${BUCKET}" \
+            --exclude "*" \
+            --include "_astro/*" \
+            --cache-control "public, max-age=31536000, immutable"
+          aws s3 sync dist/ "s3://${BUCKET}" \
+            --delete \
+            --exclude "*" \
+            --include "*.html" \
+            --include "sitemap*.xml" \
+            --include "robots.txt" \
+            --cache-control "public, max-age=0, must-revalidate"
+          aws cloudfront create-invalidation \
+            --distribution-id "${DISTRIBUTION}" \
+            --paths "/*"

@@ -1,0 +1,92 @@
+---
+import Button from '@/components/ui/Button.astro';
+import Container from '@/components/ui/Container.astro';
+import LanguageSwitcher from '@/components/layout/LanguageSwitcher.astro';
+import { appUrl, footerHrefs, siteName, socialLinks } from '@/config/site';
+import type { Locale } from '@/i18n/config';
+import { localizedPath, useTranslations } from '@/i18n/utils';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const footer = t('footer');
+const socialLabels: Record<(typeof socialLinks)[number]['id'], string> = {
+  instagram: footer.instagram,
+  facebook: footer.facebook,
+};
+
+function hrefFor(id: string): string {
+  const href = footerHrefs[id] ?? '/';
+  return href.startsWith('http') ? href : localizedPath(lang, href);
+}
+---
+
+<footer class="border-t border-line bg-surface">
+  <Container>
+    <div class="flex flex-col items-center gap-4 py-8">
+      <p class="text-center text-sm text-muted">{footer.follow}</p>
+      <ul class="flex flex-wrap justify-center gap-3">
+        {socialLinks.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              class="inline-flex min-h-11 items-center rounded-pill px-4 text-sm font-semibold ring-1 ring-navy"
+              target="_blank"
+              rel="noreferrer"
+            >
+              {socialLabels[link.id]}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+    <div class="grid gap-8 border-t border-line py-10 md:grid-cols-2 lg:grid-cols-[1.2fr_repeat(4,1fr)]">
+      <div class="flex flex-col items-start gap-4">
+        <a href={localizedPath(lang, '/')} class="text-xl font-semibold text-navy">
+          {siteName.slice(0, 7)}
+          <span class="text-primary">{siteName.slice(7)}</span>
+        </a>
+        <p class="max-w-xs text-sm text-muted">{footer.blurb}</p>
+        <Button href={appUrl()}>{footer.startSelling}</Button>
+      </div>
+      {footer.columns.map((column) => (
+        <nav aria-label={column.title}>
+          <h2 class="text-sm font-semibold tracking-wide text-navy uppercase">{column.title}</h2>
+          <ul class="mt-3 flex flex-col">
+            {column.links.map((link) => {
+              const href = hrefFor(link.id);
+              const external = href.startsWith('http');
+              return (
+                <li>
+                  <a
+                    href={href}
+                    class="inline-flex min-h-11 items-center text-sm text-muted"
+                    {...(external ? { target: '_blank', rel: 'noreferrer' } : {})}
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+      ))}
+    </div>
+    <div class="flex flex-col gap-4 border-t border-line py-6 text-sm text-muted md:flex-row md:items-center md:justify-between">
+      <p>{footer.copyright}</p>
+      <div class="flex flex-wrap items-center gap-4">
+        <LanguageSwitcher lang={lang} landmark={false} />
+        <button
+          type="button"
+          class="inline-flex min-h-11 items-center font-semibold"
+          data-cc="show-preferencesModal"
+        >
+          {footer.cookieSettings}
+        </button>
+      </div>
+    </div>
+  </Container>
+</footer>

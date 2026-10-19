@@ -1,0 +1,36 @@
+---
+import Button from '@/components/ui/Button.astro';
+import Card from '@/components/ui/Card.astro';
+import Container from '@/components/ui/Container.astro';
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+import { appUrl } from '@/config/site';
+import type { Locale } from '@/i18n/config';
+import { useTranslations } from '@/i18n/utils';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const section = useTranslations(lang)('whatChanges');
+---
+
+<section id="what-changes" class="bg-surface py-12 md:py-20">
+  <Container>
+    <SectionHeading title={section.title} />
+    {/* TODO: implement visual */}
+    <ul class="mt-8 grid gap-4 md:grid-cols-2">
+      {section.items.map((item) => (
+        <li>
+          <Card>
+            <h3 class="text-xl font-semibold">{item.title}</h3>
+            <p class="mt-2 text-muted">{item.body}</p>
+          </Card>
+        </li>
+      ))}
+    </ul>
+    <div class="mt-8">
+      <Button href={appUrl()}>{section.cta}</Button>
+    </div>
+  </Container>
+</section>

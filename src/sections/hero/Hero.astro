@@ -1,0 +1,95 @@
+---
+import { Image } from 'astro:assets';
+import PlayButton from '@/sections/hero/PlayButton.astro';
+import { externalLinks } from '@/config/site';
+import type { Locale } from '@/i18n/config';
+import { useTranslations } from '@/i18n/utils';
+import background from '../../../design/slide_1/image 71.png';
+import scrimUrl from '../../../design/slide_1/scrim.svg?url';
+import plannerUrl from '../../../design/slide_1/Planner window.svg?url';
+import phoneUrl from '../../../design/slide_1/Frame 2124.svg?url';
+import playMarketUrl from '../../../design/slide_1/playmarket.svg?url';
+import appStoreUrl from '../../../design/slide_1/App Store.svg?url';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const hero = useTranslations(lang)('hero');
+---
+
+<section id="hero">
+  <div class="mx-auto w-full max-w-[1440px] px-[18px] pt-8 lg:px-0 lg:pt-[97px]">
+    <div class="lg:pr-[123px] lg:pl-[60px]">
+      <div class="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+        <h1 class="max-w-[11em] text-[40px] leading-[1.05] font-medium tracking-[-0.03em] text-ink lg:max-w-[740px] lg:text-[78px] lg:leading-[0.92]">
+          {hero.title}
+        </h1>
+        <div class="flex w-full max-w-[340px] flex-col gap-8 lg:max-w-[318px]">
+          <p class="text-base leading-snug text-ink lg:text-lg">
+            {hero.lead}
+            <br />
+            {hero.operation} <span class="font-semibold">{hero.pocket}</span>
+          </p>
+          <div class="flex gap-4">
+            <a href={externalLinks.googlePlay} target="_blank" rel="noreferrer">
+              <img src={playMarketUrl} width="153" height="46" alt={hero.googlePlay} />
+            </a>
+            <a href={externalLinks.appStore} target="_blank" rel="noreferrer">
+              <img src={appStoreUrl} width="149" height="46" alt={hero.appStore} />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {/*
+    Photo placeholder. Planner window and the phone sit on the beach until a video replaces them.
+    Positions are measured on the 1440 export: stage is image 71 (1440×810).
+  */}
+  <div class="relative mx-auto mt-8 w-full max-w-[1440px] lg:mt-[87px]">
+    <div class="relative aspect-[1440/810] w-full">
+      <Image
+        src={background}
+        alt={hero.stageAlt}
+        width={1440}
+        height={810}
+        widths={[640, 960, 1440]}
+        sizes="(min-width: 1440px) 1440px, 100vw"
+        loading="eager"
+        fetchpriority="high"
+        class="absolute inset-0 h-full w-full object-cover"
+      />
+      <img
+        src={scrimUrl}
+        alt=""
+        width="1440"
+        height="384"
+        class="pointer-events-none absolute inset-x-0 bottom-0 h-[47.407%] w-full"
+      />
+      <img
+        src={plannerUrl}
+        alt=""
+        width="713"
+        height="393"
+        class="pointer-events-none absolute top-[13.704%] left-[18.889%] h-[48.519%] w-[49.514%]"
+      />
+      <img
+        src={phoneUrl}
+        alt=""
+        width="395"
+        height="721"
+        class="pointer-events-none absolute top-[6.173%] left-[55.625%] h-[89.012%] w-[27.431%]"
+      />
+      <PlayButton
+        label={hero.watch}
+        class="absolute top-[73.21%] left-[16.806%] hidden lg:inline-flex"
+      />
+    </div>
+    <div class="mt-6 flex justify-center lg:hidden">
+      <PlayButton label={hero.watch} />
+    </div>
+  </div>
+</section>

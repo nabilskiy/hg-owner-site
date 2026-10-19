@@ -1,0 +1,31 @@
+---
+import Card from '@/components/ui/Card.astro';
+import Container from '@/components/ui/Container.astro';
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+import type { Locale } from '@/i18n/config';
+import { useTranslations } from '@/i18n/utils';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const section = useTranslations(lang)('solutions');
+---
+
+<section id="solutions" class="bg-surface py-12 md:py-20">
+  <Container>
+    <SectionHeading eyebrow={section.eyebrow} title={section.title} />
+    {/* TODO: implement visual */}
+    <ul class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {section.items.map((item) => (
+        <li>
+          <Card>
+            <h3 class="text-xl font-semibold">{item.title}</h3>
+            <p class="mt-2 text-muted">{item.body}</p>
+          </Card>
+        </li>
+      ))}
+    </ul>
+  </Container>
+</section>

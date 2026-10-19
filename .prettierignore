@@ -1,0 +1,10 @@
+dist
+node_modules
+.astro
+pnpm-lock.yaml
+infra/cdk.out
+design
+architecture.md
+.lighthouseci
+playwright-report
+test-results

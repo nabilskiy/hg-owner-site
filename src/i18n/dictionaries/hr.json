@@ -1,0 +1,378 @@
+{
+  "common": {
+    "metaDescription": "One ecosystem to run your experience business.",
+    "skipToContent": "Skip to content",
+    "previous": "Previous",
+    "next": "Next",
+    "notFoundTitle": "Page not found",
+    "notFoundBody": "This page is not available.",
+    "english": "EN",
+    "croatian": "HR",
+    "consentTitle": "Cookies",
+    "consentDescription": "Necessary cookies keep the site working. Analytics cookies stay off until you allow them.",
+    "consentAccept": "Accept all",
+    "consentReject": "Reject",
+    "consentSave": "Save",
+    "consentNecessary": "Necessary",
+    "consentAnalytics": "Analytics"
+  },
+  "nav": {
+    "menu": "Primary",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "language": "Language",
+    "product": "Product",
+    "solutions": "Solutions",
+    "marketplace": "Marketplace",
+    "pricing": "Pricing",
+    "resources": "Resources",
+    "forTravelers": "For travelers",
+    "startSelling": "Start selling"
+  },
+  "hero": {
+    "title": "One phone. A whole lot of business.",
+    "lead": "Bookings. Customers. Payments.",
+    "operation": "Your entire operation.",
+    "pocket": "All in your pocket.",
+    "watch": "Watch how it works",
+    "googlePlay": "Get it on Google Play",
+    "appStore": "Download on the App Store",
+    "stageAlt": "Planner and marketplace on a sunset beach",
+    "startSelling": "Start selling",
+    "seeHow": "See how it works",
+    "planner": {
+      "label": "Planner",
+      "date": "Wednesday, 25 October",
+      "filtersLabel": "Booking status",
+      "filters": ["All", "Pending", "Accepted"],
+      "bookings": [
+        {
+          "time": "08:30 – 10:30",
+          "title": "Morning cruise",
+          "capacity": "8/10",
+          "person": "Capt. G. Bianchi",
+          "status": "Confirmed",
+          "statusId": "confirmed"
+        },
+        {
+          "time": "11:30 – 12:30",
+          "title": "Blue cave tour",
+          "capacity": "6/10",
+          "person": "F. Verdi",
+          "status": "Unpaid",
+          "statusId": "unpaid"
+        },
+        {
+          "time": "15:30 – 16:30",
+          "title": "Island hopping",
+          "capacity": "5/10",
+          "person": "Assign staff",
+          "status": "Needs staff",
+          "statusId": "needsStaff"
+        },
+        {
+          "time": "18:30 – 20:30",
+          "title": "Sunset Boat Tour",
+          "capacity": "10/12",
+          "person": "M. Esposito",
+          "status": "Confirmed",
+          "statusId": "confirmed"
+        },
+        {
+          "time": "20:30 – 22:00",
+          "title": "Night tour",
+          "capacity": "0/12",
+          "person": "Not assigned yet",
+          "status": "Open",
+          "statusId": "open"
+        }
+      ],
+      "detailId": "Booking #BK-1042",
+      "detailTitle": "Sunset Boat Tour",
+      "guestsLabel": "Guests",
+      "guests": "2",
+      "sourceLabel": "Source",
+      "source": "Hotel Marina QR",
+      "paymentLabel": "Payment",
+      "payment": "Paid",
+      "guestLabel": "Guest",
+      "guest": "Returning",
+      "checkIn": "Check in guests",
+      "appsLabel": "Planner sections",
+      "apps": ["Booking", "Availability", "Planner", "Payment", "Customer", "Analytics"]
+    }
+  },
+  "soundFamiliar": {
+    "title": "Sound familiar?",
+    "cards": [
+      { "title": "Messages", "detail": "23 unread" },
+      { "title": "Guide has not confirmed", "detail": "Calling for the 6th time" },
+      { "title": "3 calendars + a notebook" },
+      {
+        "title": "What is really free?",
+        "detail": "Sunset Boat Tour · 18:30",
+        "status": "Overbooked: 14/12"
+      }
+    ]
+  },
+  "whatChanges": {
+    "title": "What changes",
+    "cta": "Start selling",
+    "items": [
+      {
+        "title": "Every booking in one record",
+        "body": "Guest, source, payment and status stay together. No copying between tools."
+      },
+      {
+        "title": "Less manual work",
+        "body": "Confirmations, reminders and check-in follow the booking automatically."
+      },
+      {
+        "title": "One availability, every channel",
+        "body": "Direct sales, QR, agents and Marketplace draw from the same seats."
+      },
+      {
+        "title": "Know where sales come from",
+        "body": "See which link, QR code or partner brings bookings and revenue."
+      }
+    ]
+  },
+  "ecosystem": {
+    "eyebrow": "The ecosystem",
+    "title": "Everything you need, in one connected system",
+    "tabsLabel": "Ecosystem areas",
+    "cta": "Start selling",
+    "tabs": [
+      {
+        "id": "sell",
+        "label": "Sell",
+        "title": "Sell everywhere your guests already are",
+        "body": "Create an Experience once and offer it through every channel. The source of each booking is saved automatically.",
+        "points": [
+          "Owner Storefront",
+          "Booking Widget",
+          "Agents and partners, each with their own booking source",
+          "Publishing to the HolidayGet Marketplace as an extra channel"
+        ]
+      },
+      { "id": "manage", "label": "Manage" },
+      { "id": "customers", "label": "Customers" },
+      { "id": "payments", "label": "Payments" },
+      { "id": "insights", "label": "Insights" },
+      { "id": "marketplace", "label": "Marketplace" }
+    ]
+  },
+  "solutions": {
+    "eyebrow": "Solutions",
+    "title": "Built for every kind of experience",
+    "items": [
+      {
+        "title": "Tours & Activities",
+        "body": "Excursions, guided tours, workshops, scheduled boat trips, safaris, tastings"
+      },
+      {
+        "title": "Equipment Rental",
+        "body": "Bicycles, SUP, kayaks, skis, equipment, umbrellas, etc."
+      },
+      {
+        "title": "Events & Tickets",
+        "body": "Concerts, festivals, parties, performances, sporting events, tickets"
+      },
+      {
+        "title": "Transfers & Transport",
+        "body": "Transfers, taxis, shuttles, car rentals with a driver"
+      },
+      {
+        "title": "Boat rental",
+        "body": "Boat, yacht, and RIB rentals, sailing vessels without a schedule"
+      },
+      {
+        "title": "Restaurants",
+        "body": "Table reservations, deposits, culinary experiences"
+      }
+    ]
+  },
+  "beyondBasics": {
+    "eyebrow": "Beyond the basics",
+    "label": "Feature highlights",
+    "cards": [
+      {
+        "title": "A checkout your guests can trust",
+        "body": "Price, platform fee and VAT are itemised before payment, and consent boxes are never pre-ticked.",
+        "points": [
+          "Tap to Pay",
+          "Offline",
+          "Confirm and pay",
+          "Experience price",
+          "Platform fee",
+          "VAT",
+          "Total",
+          "Sample",
+          "Pay now"
+        ]
+      },
+      {
+        "title": "Advertise offline, too",
+        "body": "Posters, QR stickers, NFC cards and branded invoices, generated from your Experience.",
+        "points": [
+          "Powered by HolidayGet",
+          "Fast and secure online booking",
+          "Nature's Majestic Wonder",
+          "October 25 - 30",
+          "The Ultimate Dubrovnik Experience",
+          "Per person",
+          "50 €",
+          "10:00-11:00",
+          "12:00-13:00",
+          "Scan to Book",
+          "Dubrovnik Boat Rentals",
+          "Brsalje St. 5, 20000 Dubrovnik. +385 20 312 011"
+        ]
+      },
+      {
+        "title": "Bring your team and partners in",
+        "body": "Give staff and agents the right access, and invite one-time helpers with a single message.",
+        "points": [
+          "Skipper",
+          "Guide",
+          "Hostess",
+          "Agent",
+          "Contractor invite",
+          "Guide needed",
+          "Sunset Boat Tour · Today 18:30 · 10 guests",
+          "Accept",
+          "Decline"
+        ]
+      },
+      {
+        "title": "Create with AI",
+        "points": ["Draft title", "Describe", "Continue", "Draft with AI"]
+      }
+    ]
+  },
+  "gettingStarted": {
+    "eyebrow": "Getting started",
+    "title": "Start selling in four steps",
+    "stepsLabel": "Steps",
+    "startSelling": "Start selling",
+    "explore": "Explore all product features",
+    "steps": [
+      {
+        "title": "Registration",
+        "points": ["Business name", "Email"]
+      },
+      {
+        "title": "Create Experience",
+        "points": ["Sunset Boat Tour", "Draft with AI", "Continue"]
+      },
+      {
+        "title": "Publish",
+        "points": ["Sunset Boat Tour", "Published", "QR", "Link", "Marketplace"]
+      },
+      {
+        "title": "Get bookings",
+        "points": ["New booking", "2 guests · 18:30", "Availability updated"]
+      }
+    ]
+  },
+  "testimonials": {
+    "eyebrow": "Owner stories",
+    "title": "What experience businesses say",
+    "items": [
+      {
+        "quote": "Using HolidayGet has transformed my business! The platform is intuitive and has streamlined my booking process, allowing me to focus on providing exceptional experiences for my guests. I couldn't be happier!",
+        "name": "Sarah Thompson",
+        "role": "Owner of Coastal Adventures",
+        "category": "Business · Tours & Activities"
+      },
+      {
+        "quote": "Thanks to HolidayGet, managing my boat rental business has never been easier. The integrated tools help me keep track of bookings and customer interactions seamlessly. Highly recommend!",
+        "name": "Mark Johnson",
+        "role": "Owner of Blue Wave Rentals",
+        "category": "Business · Boat rental"
+      },
+      {
+        "quote": "HolidayGet has revolutionized how I run my restaurant. The ease of managing reservations and payments has improved my workflow significantly. My customers love the convenience too!",
+        "name": "Emily Chen",
+        "role": "Owner of Taste of Italy",
+        "category": "Business · Restaurants"
+      }
+    ]
+  },
+  "faq": {
+    "title": "Questions before you start",
+    "description": "Short answers to what Owners ask most often. More detail lives in the Help center.",
+    "helpCta": "Visit the Help center",
+    "items": [
+      {
+        "q": "What is HolidayGet and who is it for?",
+        "a": "HolidayGet is an ecosystem for experience businesses: tours, events, transport, gear rental, boat rental and restaurants. Owners create Experiences, sell them through several channels and manage bookings, guests, payments and analytics in one place."
+      },
+      { "q": "How do guests book and pay?" },
+      { "q": "How quickly can I get started?" },
+      { "q": "How do payments and payouts work?" },
+      { "q": "Can I sell on the spot and check in guests without internet?" },
+      { "q": "How much does it cost?" }
+    ]
+  },
+  "finalCta": {
+    "title": "Ready to run your experience business from one place?",
+    "description": "Create your first Experience and start taking bookings through every channel.",
+    "startSelling": "Start selling",
+    "seeHow": "See how it works"
+  },
+  "footer": {
+    "follow": "Follow product updates and Owner stories",
+    "blurb": "A connected platform for experience businesses.",
+    "startSelling": "Start selling",
+    "copyright": "© 2026 HolidayGet. All rights reserved.",
+    "cookieSettings": "Cookie settings",
+    "instagram": "Instagram",
+    "facebook": "Facebook",
+    "columns": [
+      {
+        "title": "Product",
+        "links": [
+          { "id": "sell", "label": "Sell" },
+          { "id": "manage", "label": "Manage" },
+          { "id": "customers", "label": "Customers" },
+          { "id": "payments", "label": "Payments" },
+          { "id": "insights", "label": "Insights" },
+          { "id": "marketplace", "label": "Marketplace" }
+        ]
+      },
+      {
+        "title": "Solutions",
+        "links": [
+          { "id": "tours", "label": "Tours" },
+          { "id": "events", "label": "Events" },
+          { "id": "transport", "label": "Transport" },
+          { "id": "rentGear", "label": "Rent gear" },
+          { "id": "boatRental", "label": "Boat rental" },
+          { "id": "restaurant", "label": "Restaurant" }
+        ]
+      },
+      {
+        "title": "Resources",
+        "links": [
+          { "id": "helpCenter", "label": "Help center" },
+          { "id": "guides", "label": "Guides" },
+          { "id": "faq", "label": "FAQ" },
+          { "id": "blog", "label": "Blog" },
+          { "id": "pricing", "label": "Pricing" }
+        ]
+      },
+      {
+        "title": "Company and legal",
+        "links": [
+          { "id": "contact", "label": "Contact" },
+          { "id": "terms", "label": "Terms and Conditions" },
+          { "id": "privacy", "label": "Privacy Policy" },
+          { "id": "cookies", "label": "Cookies Policy" },
+          { "id": "accessibility", "label": "Accessibility" },
+          { "id": "legalNotice", "label": "Legal notice" }
+        ]
+      }
+    ]
+  }
+}
