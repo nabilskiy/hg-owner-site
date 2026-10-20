@@ -1,9 +1,8 @@
 name: Deploy
 
+# Manual only until AWS deploy is in use.
 on:
-  push:
-    branches: [main]
-    tags: ['v*.*.*']
+  workflow_dispatch:
 
 permissions:
   id-token: write
