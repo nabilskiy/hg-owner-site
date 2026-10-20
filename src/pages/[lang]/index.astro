@@ -11,9 +11,9 @@ import FinalCta from '@/sections/final-cta/FinalCta.astro';
 import GettingStarted from '@/sections/getting-started/GettingStarted.astro';
 import Hero from '@/sections/hero/Hero.astro';
 import Solutions from '@/sections/solutions/Solutions.astro';
+import OwnerIntro from '@/sections/owner-intro/OwnerIntro.astro';
 import SoundFamiliar from '@/sections/sound-familiar/SoundFamiliar.astro';
 import Testimonials from '@/sections/testimonials/Testimonials.astro';
-import WhatChanges from '@/sections/what-changes/WhatChanges.astro';
 
 export function getStaticPaths() {
   return locales.map((lang) => ({ params: { lang } }));
@@ -40,7 +40,7 @@ const faqItems = t('faq').items.map((item) => ({
   <Header slot="header" lang={lang} />
   <Hero lang={lang} />
   <SoundFamiliar lang={lang} />
-  <WhatChanges lang={lang} />
+  <OwnerIntro lang={lang} />
   <Ecosystem lang={lang} />
   <Solutions lang={lang} />
   <BeyondBasics lang={lang} />

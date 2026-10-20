@@ -1,9 +1,10 @@
 ---
-import Container from '@/components/ui/Container.astro';
-import SectionHeading from '@/components/ui/SectionHeading.astro';
 import type { Locale } from '@/i18n/config';
 import { useTranslations } from '@/i18n/utils';
-import SoundFamiliarCards from '@/sections/sound-familiar/islands/SoundFamiliarCards';
+import messagesUrl from '@/assets/sound-familiar/messages.svg?url';
+import missedPlansUrl from '@/assets/sound-familiar/missed-plans.svg?url';
+import guideUrl from '@/assets/sound-familiar/guide.svg?url';
+import overbookedUrl from '@/assets/sound-familiar/overbooked.svg?url';
 
 interface Props {
   lang: Locale;
@@ -11,14 +12,74 @@ interface Props {
 
 const { lang } = Astro.props;
 const section = useTranslations(lang)('soundFamiliar');
+
+const cards = [
+  {
+    src: messagesUrl,
+    width: 445,
+    height: 108,
+    alt: `${section.cards[0].title}. ${section.cards[0].detail}`,
+    class: 'top-[40%] left-[8.333%] z-10',
+  },
+  {
+    src: missedPlansUrl,
+    width: 445,
+    height: 107,
+    alt: `${section.cards[1].title}. ${section.cards[1].detail}`,
+    class: 'top-[54.167%] left-[25.833%] z-20',
+  },
+  {
+    src: guideUrl,
+    width: 445,
+    height: 108,
+    alt: `${section.cards[2].title}. ${section.cards[2].detail}`,
+    class: 'top-[32.917%] left-[43.333%] z-10',
+  },
+  {
+    src: overbookedUrl,
+    width: 445,
+    height: 108,
+    alt: `${section.cards[3].title}. ${section.cards[3].detail}`,
+    class: 'top-[52.917%] left-[60.833%] z-20',
+  },
+] as const;
+
+const cardMotion =
+  'origin-center hover:z-30 motion-safe:transition-transform motion-safe:duration-[450ms] motion-safe:ease-[cubic-bezier(0.22,1,0.36,1)] motion-safe:hover:-translate-y-3 motion-safe:hover:scale-[1.04]';
 ---
 
-<section id="sound-familiar" class="py-12 md:py-20">
-  <Container>
-    <SectionHeading title={section.title} />
-    {/* TODO: implement visual */}
-    <div class="mt-8">
-      <SoundFamiliarCards client:visible cards={section.cards} />
-    </div>
-  </Container>
+<section id="sound-familiar" class="bg-canvas">
+  <div class="mx-auto max-w-[1440px] px-8 pt-6 pb-16 lg:hidden">
+    <h2 class="mx-auto max-w-[18.5rem] text-center text-[32px] leading-[1.15] font-medium tracking-[-0.03em] text-ink">
+      {section.title}
+    </h2>
+    <ul class="mx-auto mt-6 flex w-full max-w-[17.375rem] flex-col gap-2">
+      {cards.map((card) => (
+        <li>
+          <img
+            src={card.src}
+            width={card.width}
+            height={card.height}
+            alt={card.alt}
+            class={`h-auto w-full ${cardMotion}`}
+          />
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <div class="@container relative mx-auto hidden aspect-[1440/480] w-full max-w-[1440px] lg:block">
+    <h2 class="absolute inset-x-0 top-[17.292%] text-center text-[3.333cqw] leading-none font-medium tracking-[-0.03em] whitespace-nowrap text-ink">
+      {section.title}
+    </h2>
+    {cards.map((card) => (
+      <img
+        src={card.src}
+        width={card.width}
+        height={card.height}
+        alt={card.alt}
+        class={`absolute w-[30.903%] ${card.class} ${cardMotion}`}
+      />
+    ))}
+  </div>
 </section>
