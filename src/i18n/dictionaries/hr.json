@@ -103,17 +103,17 @@
     }
   },
   "soundFamiliar": {
-    "title": "Sound familiar?",
+    "title": "They're already here. Are you?",
     "cards": [
-      { "title": "Messages", "detail": "23 unread" },
+      { "title": "Unread", "detail": "Messages" },
+      { "title": "Missed plans", "detail": "3 calendars + a notebook" },
       { "title": "Guide has not confirmed", "detail": "Calling for the 6th time" },
-      { "title": "3 calendars + a notebook" },
-      {
-        "title": "What is really free?",
-        "detail": "Sunset Boat Tour · 18:30",
-        "status": "Overbooked: 14/12"
-      }
+      { "title": "Overbooked: 14/12", "detail": "Sunset Boat Tour · 18:30" }
     ]
+  },
+  "ownerIntro": {
+    "ghostLines": ["I run a business.", "Not a circus."],
+    "titleLines": ["You run the business.", "Don't let it run you."]
   },
   "whatChanges": {
     "title": "What changes",
