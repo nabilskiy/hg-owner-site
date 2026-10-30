@@ -1,0 +1,114 @@
+---
+import type { Locale } from '@/i18n/config';
+import { useTranslations } from '@/i18n/utils';
+import bookingUrl from '@/assets/channels/booking.svg?url';
+import socialUrl from '@/assets/channels/social.svg?url';
+import instagramUrl from '@/assets/channels/instagram.svg?url';
+import qrCardUrl from '@/assets/channels/qr-card.svg?url';
+import posterUrl from '@/assets/channels/poster.svg?url';
+import marketplaceUrl from '@/assets/channels/marketplace.svg?url';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const section = useTranslations(lang)('channels');
+
+const pieces = [
+  {
+    src: bookingUrl,
+    alt: 'Booking',
+    width: 269,
+    height: 578,
+    class: 'top-[40.7%] left-0 z-10 w-[14.2%]',
+  },
+  {
+    src: socialUrl,
+    alt: 'Social links',
+    width: 325,
+    height: 578,
+    class: 'top-[11.9%] left-[16.7%] z-20 w-[20.8%]',
+  },
+  {
+    src: qrCardUrl,
+    alt: 'QR codes',
+    width: 440,
+    height: 440,
+    class: 'top-[4.7%] left-[33.3%] z-30 w-[22.7%]',
+  },
+  {
+    src: instagramUrl,
+    alt: 'Social links',
+    width: 325,
+    height: 578,
+    class: 'top-[41.8%] left-[37.3%] z-[15] w-[19.2%]',
+  },
+  {
+    src: posterUrl,
+    alt: 'Owner storefront',
+    width: 437,
+    height: 580,
+    class: 'top-[33.6%] left-[54.2%] z-10 w-[29.1%]',
+  },
+  {
+    src: marketplaceUrl,
+    alt: 'HolidayGet Marketplace',
+    width: 373,
+    height: 578,
+    class: 'top-0 left-[75.8%] z-[25] w-[23.4%]',
+  },
+];
+
+const tones: Record<string, string> = {
+  ink: 'text-ink',
+  slash: 'text-[#dc5034]',
+  muted: 'text-[#b9c9cb]',
+};
+---
+
+<section id="channels" class="bg-canvas overflow-hidden">
+  <div class="mx-auto max-w-[1440px] px-8 pt-16 lg:px-[84px] lg:pt-24">
+    <h2 class="text-[34px] leading-[1.15] font-medium tracking-[-0.03em] lg:text-[64px] lg:leading-[1.22]">
+      {section.lines.map((line, lineIndex) => (
+        <>
+          {lineIndex > 0 && <br />}
+          {line.split(/(\s*\/\s*)/).map((part, partIndex) => {
+            const tone = part.includes('/')
+              ? 'slash'
+              : lineIndex === 0 && partIndex === 0
+                ? 'ink'
+                : 'muted';
+            return <span class={tones[tone]}>{part}</span>;
+          })}
+        </>
+      ))}
+    </h2>
+  </div>
+
+  <ul class="mt-8 flex snap-x gap-4 overflow-x-auto px-8 pb-12 lg:hidden">
+    {pieces.map((piece) => (
+      <li class="w-[68%] shrink-0 snap-center">
+        <img
+          src={piece.src}
+          alt={piece.alt}
+          width={piece.width}
+          height={piece.height}
+          class="h-auto w-full"
+        />
+      </li>
+    ))}
+  </ul>
+
+  <div class="relative mx-auto hidden aspect-[1440/858] w-full max-w-[1440px] lg:block">
+    {pieces.map((piece) => (
+      <img
+        src={piece.src}
+        alt={piece.alt}
+        width={piece.width}
+        height={piece.height}
+        class:list={['absolute h-auto', piece.class]}
+      />
+    ))}
+  </div>
+</section>

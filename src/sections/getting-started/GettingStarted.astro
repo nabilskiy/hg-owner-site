@@ -1,11 +1,10 @@
 ---
-import Button from '@/components/ui/Button.astro';
-import Container from '@/components/ui/Container.astro';
-import SectionHeading from '@/components/ui/SectionHeading.astro';
-import { appUrl } from '@/config/site';
 import type { Locale } from '@/i18n/config';
-import { localizedPath, useTranslations } from '@/i18n/utils';
-import GettingStartedSteps from '@/sections/getting-started/islands/GettingStartedSteps';
+import { useTranslations } from '@/i18n/utils';
+import registrationUrl from '@/assets/getting-started/registration.svg?url';
+import createUrl from '@/assets/getting-started/create.svg?url';
+import publishUrl from '@/assets/getting-started/publish.svg?url';
+import bookingsUrl from '@/assets/getting-started/bookings.svg?url';
 
 interface Props {
   lang: Locale;
@@ -13,20 +12,33 @@ interface Props {
 
 const { lang } = Astro.props;
 const section = useTranslations(lang)('gettingStarted');
+
+const visuals = [registrationUrl, createUrl, publishUrl, bookingsUrl];
 ---
 
-<section id="getting-started" class="bg-surface py-12 md:py-20">
-  <Container>
-    <SectionHeading eyebrow={section.eyebrow} title={section.title} />
-    {/* TODO: implement visual */}
-    <div class="mt-8">
-      <GettingStartedSteps client:visible label={section.stepsLabel} steps={section.steps} />
-    </div>
-    <div class="mt-8 flex flex-wrap gap-3">
-      <Button href={appUrl()}>{section.startSelling}</Button>
-      <Button href={localizedPath(lang, '/#ecosystem')} variant="secondary">
-        {section.explore}
-      </Button>
-    </div>
-  </Container>
+<section id="getting-started" class="bg-canvas py-16 lg:py-24">
+  <div class="mx-auto max-w-[1440px] px-8 lg:px-[84px]">
+    <h2 class="max-w-[16ch] text-[40px] leading-[0.95] font-semibold tracking-[-0.03em] text-ink lg:text-[64px]">
+      {section.title}
+    </h2>
+    <ol class="mt-12 grid gap-10 sm:grid-cols-2 lg:mt-16 lg:grid-cols-4 lg:gap-6">
+      {section.steps.map((step, index) => (
+        <li>
+          <p class="text-center text-[56px] leading-none font-medium text-[#e4e8e8] lg:text-[72px]">
+            {index + 1}
+          </p>
+          <h3 class="mt-2 text-center text-lg font-semibold tracking-[-0.02em] text-ink lg:text-xl">
+            {step.title}
+          </h3>
+          <img
+            src={visuals[index]}
+            alt={step.title}
+            width="294"
+            height="220"
+            class="mt-5 h-auto w-full"
+          />
+        </li>
+      ))}
+    </ol>
+  </div>
 </section>

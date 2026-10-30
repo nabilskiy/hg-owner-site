@@ -5,12 +5,14 @@ import { isLocale, locales } from '@/i18n/config';
 import { useTranslations } from '@/i18n/utils';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import BeyondBasics from '@/sections/beyond-basics/BeyondBasics.astro';
-import Ecosystem from '@/sections/ecosystem/Ecosystem.astro';
+import Channels from '@/sections/channels/Channels.astro';
+import Effect from '@/sections/effect/Effect.astro';
 import Faq from '@/sections/faq/Faq.astro';
 import FinalCta from '@/sections/final-cta/FinalCta.astro';
 import GettingStarted from '@/sections/getting-started/GettingStarted.astro';
 import Hero from '@/sections/hero/Hero.astro';
 import Solutions from '@/sections/solutions/Solutions.astro';
+import CreateOnce from '@/sections/create-once/CreateOnce.astro';
 import OwnerApp from '@/sections/owner-app/OwnerApp.astro';
 import OwnerIntro from '@/sections/owner-intro/OwnerIntro.astro';
 import SoundFamiliar from '@/sections/sound-familiar/SoundFamiliar.astro';
@@ -43,10 +45,12 @@ const faqItems = t('faq').items.map((item) => ({
   <SoundFamiliar lang={lang} />
   <OwnerIntro lang={lang} />
   <OwnerApp lang={lang} />
-  <Ecosystem lang={lang} />
+  <CreateOnce lang={lang} />
+  <Channels lang={lang} />
+  <Effect lang={lang} />
   <Solutions lang={lang} />
-  <BeyondBasics lang={lang} />
   <GettingStarted lang={lang} />
+  <BeyondBasics lang={lang} />
   <Testimonials lang={lang} />
   <Faq lang={lang} />
   <FinalCta lang={lang} />

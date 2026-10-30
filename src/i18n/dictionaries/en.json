@@ -135,6 +135,10 @@
       }
     ]
   },
+  "createOnce": {
+    "ghostLines": ["Why am I selling in", "five places and", "managing five", "systems?"],
+    "title": "Create once. Sell everywhere."
+  },
   "whatChanges": {
     "title": "What changes",
     "cta": "Start selling",
@@ -155,6 +159,25 @@
         "title": "Know where sales come from",
         "body": "See which link, QR code or partner brings bookings and revenue."
       }
+    ]
+  },
+  "channels": {
+    "lines": [
+      "Owner storefront / Booking",
+      "widget / Social links / QR codes /",
+      "Agents & partners / HolidayGet",
+      "Marketplace"
+    ]
+  },
+  "effect": {
+    "lead": "The ",
+    "mark": "holidayget",
+    "tail": " effect",
+    "ghostLines": ["Trust your gut.", "Make it show its", "work."],
+    "stats": [
+      { "value": "+25%", "label": "More booking opportunities", "tone": "blue" },
+      { "value": "+40%", "label": "Higher direct-sales potential", "tone": "pink" },
+      { "value": "3×", "label": "More chances to get noticed", "tone": "cream" }
     ]
   },
   "ecosystem": {
@@ -185,30 +208,37 @@
   "solutions": {
     "eyebrow": "Solutions",
     "title": "Built for every kind of experience",
+    "coverage": "Coverage of over 500 types of businesses",
     "items": [
       {
         "title": "Tours & Activities",
-        "body": "Excursions, guided tours, workshops, scheduled boat trips, safaris, tastings"
-      },
-      {
-        "title": "Equipment Rental",
-        "body": "Bicycles, SUP, kayaks, skis, equipment, umbrellas, etc."
+        "body": "Excursions, guided tours, workshops, scheduled boat trips, safaris, tastings",
+        "featured": false
       },
       {
         "title": "Events & Tickets",
-        "body": "Concerts, festivals, parties, performances, sporting events, tickets"
-      },
-      {
-        "title": "Transfers & Transport",
-        "body": "Transfers, taxis, shuttles, car rentals with a driver"
+        "body": "Concerts, festivals, parties, performances, sporting events, tickets",
+        "featured": false
       },
       {
         "title": "Boat rental",
-        "body": "Boat, yacht, and RIB rentals, sailing vessels without a schedule"
+        "body": "Boat, yacht, and RIB rentals, sailing vessels without a schedule",
+        "featured": true
+      },
+      {
+        "title": "Equipment Rental",
+        "body": "Bicycles, SUP, kayaks, skis, equipment, umbrellas, etc.",
+        "featured": false
+      },
+      {
+        "title": "Transfers & Transport",
+        "body": "Transfers, taxis, shuttles, car rentals with a driver",
+        "featured": false
       },
       {
         "title": "Restaurants",
-        "body": "Table reservations, deposits, culinary experiences"
+        "body": "Table reservations, deposits, culinary experiences",
+        "featured": false
       }
     ]
   },

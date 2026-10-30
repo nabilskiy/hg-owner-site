@@ -1,9 +1,8 @@
 ---
-import Card from '@/components/ui/Card.astro';
-import Container from '@/components/ui/Container.astro';
-import SectionHeading from '@/components/ui/SectionHeading.astro';
 import type { Locale } from '@/i18n/config';
 import { useTranslations } from '@/i18n/utils';
+import boatUrl from '@/assets/solutions/boat.png?url';
+import fiveHundredUrl from '@/assets/solutions/five-hundred.png?url';
 
 interface Props {
   lang: Locale;
@@ -13,19 +12,188 @@ const { lang } = Astro.props;
 const section = useTranslations(lang)('solutions');
 ---
 
-<section id="solutions" class="bg-surface py-12 md:py-20">
-  <Container>
-    <SectionHeading eyebrow={section.eyebrow} title={section.title} />
-    {/* TODO: implement visual */}
-    <ul class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+<section id="solutions" class="bg-canvas py-16 lg:py-24">
+  <div class="mx-auto grid max-w-[1440px] items-start gap-12 px-8 lg:grid-cols-[minmax(0,420px)_minmax(0,1fr)] lg:gap-16 lg:px-[84px]">
+    <div>
+      <h2 class="max-w-[12ch] text-[40px] leading-[0.95] font-semibold tracking-[-0.03em] text-ink lg:text-[64px]">
+        {section.title}
+      </h2>
+      <p class="mt-4 text-sm text-ink/70">{section.coverage}</p>
+      <img
+        src={fiveHundredUrl}
+        alt="500"
+        width="334"
+        height="174"
+        class="mt-6 w-[min(100%,320px)]"
+      />
+    </div>
+    <ul class="solutions-list">
       {section.items.map((item) => (
         <li>
-          <Card>
-            <h3 class="text-xl font-semibold">{item.title}</h3>
-            <p class="mt-2 text-muted">{item.body}</p>
-          </Card>
+          <button type="button" class:list={['solutions-row', { 'is-default': item.featured }]}>
+            <span class="mark">
+              <img src={boatUrl} alt="" width="208" height="100" class="photo" />
+              <span class="ring" aria-hidden="true"></span>
+            </span>
+            <span class="min-w-0 flex-1 text-left">
+              <span class="block text-xl font-semibold tracking-[-0.02em] text-ink">
+                {item.title}
+              </span>
+              <span class="mt-1 block text-sm text-ink/60">{item.body}</span>
+            </span>
+            <span class="arrow" aria-hidden="true">
+              <svg
+                viewBox="0 0 20 20"
+                class="h-4 w-4"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6"
+              >
+                <path d="M4 10h12M12 6l4 4-4 4" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </span>
+          </button>
         </li>
       ))}
     </ul>
-  </Container>
+  </div>
 </section>
+
+<style>
+  .solutions-list {
+    border-top: 1px solid rgb(59 52 46 / 0.12);
+  }
+
+  .solutions-row {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 1.25rem;
+    border: 0;
+    border-bottom: 1px solid rgb(59 52 46 / 0.12);
+    padding: 1.1rem 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .solutions-row:focus-visible {
+    border-radius: 12px;
+  }
+
+  .mark {
+    position: relative;
+    display: grid;
+    width: 7.5rem;
+    min-width: 0;
+    flex: none;
+    place-items: center;
+    overflow: hidden;
+  }
+
+  @media (min-width: 1024px) {
+    .mark {
+      width: 11rem;
+      place-items: start center;
+    }
+  }
+
+  .ring,
+  .photo {
+    grid-area: 1 / 1;
+  }
+
+  .ring {
+    width: 64px;
+    height: 64px;
+    border-radius: 999px;
+    background: conic-gradient(from 140deg, #e7d3c4, #d5e0df, #ecd9cf, #d9c8b8, #e7d3c4);
+    -webkit-mask: radial-gradient(
+      farthest-side,
+      transparent calc(100% - 1.5px),
+      #000 calc(100% - 1px)
+    );
+    mask: radial-gradient(farthest-side, transparent calc(100% - 1.5px), #000 calc(100% - 1px));
+  }
+
+  .photo {
+    height: 64px;
+    width: 7.5rem;
+    object-fit: contain;
+    opacity: 0;
+  }
+
+  @media (min-width: 1024px) {
+    .photo {
+      height: 72px;
+      width: 9.5rem;
+    }
+  }
+
+  .solutions-row.is-default .photo,
+  .solutions-list:hover .solutions-row:hover .photo,
+  .solutions-list:focus-within .solutions-row:focus .photo {
+    opacity: 1;
+  }
+
+  .solutions-list:hover .solutions-row .photo,
+  .solutions-list:focus-within .solutions-row .photo {
+    opacity: 0;
+  }
+
+  .solutions-list:hover .solutions-row:hover .photo,
+  .solutions-list:focus-within .solutions-row:focus .photo {
+    opacity: 1;
+  }
+
+  .solutions-row.is-default .ring,
+  .solutions-list:hover .solutions-row:hover .ring,
+  .solutions-list:focus-within .solutions-row:focus .ring {
+    opacity: 0;
+  }
+
+  .solutions-list:hover .ring,
+  .solutions-list:focus-within .ring {
+    opacity: 1;
+  }
+
+  .solutions-list:hover .solutions-row:hover .ring,
+  .solutions-list:focus-within .solutions-row:focus .ring {
+    opacity: 0;
+  }
+
+  .arrow {
+    display: grid;
+    height: 40px;
+    width: 40px;
+    flex: none;
+    place-items: center;
+    border-radius: 999px;
+    border: 1px solid rgb(59 52 46 / 0.25);
+    color: #3b342e;
+  }
+
+  .solutions-row.is-default .arrow,
+  .solutions-list:hover .solutions-row:hover .arrow,
+  .solutions-list:focus-within .solutions-row:focus .arrow {
+    border-color: transparent;
+    background: #c74231;
+    color: white;
+  }
+
+  .solutions-list:hover .arrow,
+  .solutions-list:focus-within .arrow {
+    border-color: rgb(59 52 46 / 0.25);
+    background: transparent;
+    color: #3b342e;
+  }
+
+  .solutions-list:hover .solutions-row:hover .arrow,
+  .solutions-list:focus-within .solutions-row:focus .arrow {
+    border-color: transparent;
+    background: #c74231;
+    color: white;
+  }
+</style>
