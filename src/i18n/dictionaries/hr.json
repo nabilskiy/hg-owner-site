@@ -115,6 +115,26 @@
     "ghostLines": ["I run a business.", "Not a circus."],
     "titleLines": ["You run the business.", "Don't let it run you."]
   },
+  "ownerApp": {
+    "tiles": [
+      {
+        "title": "Every booking in one record",
+        "body": "Guest, source, payment and status."
+      },
+      {
+        "title": "Less manual work",
+        "body": "Confirmations and reminders on autopilot."
+      },
+      {
+        "title": "One availability, every channel",
+        "body": "Direct, QR, agents and partners."
+      },
+      {
+        "title": "Know where sales come from",
+        "body": "See which link or QR code pays off."
+      }
+    ]
+  },
   "whatChanges": {
     "title": "What changes",
     "cta": "Start selling",

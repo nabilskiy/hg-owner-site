@@ -1,0 +1,122 @@
+---
+import type { Locale } from '@/i18n/config';
+import { useTranslations } from '@/i18n/utils';
+import bookingUrl from '@/assets/owner-app/booking.svg?url';
+import dailyPlanUrl from '@/assets/owner-app/daily-plan.svg?url';
+import createAdvertisingUrl from '@/assets/owner-app/create-advertising.svg?url';
+import analyticsUrl from '@/assets/owner-app/analytics.svg?url';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const section = useTranslations(lang)('ownerApp');
+
+const ease =
+  'motion-safe:transition-[scale,translate,filter] motion-safe:duration-700 motion-safe:ease-[cubic-bezier(0.4,0,0.2,1)]';
+
+const tiles = [
+  {
+    src: bookingUrl,
+    title: section.tiles[0].title,
+    body: section.tiles[0].body,
+    panelClass: 'bg-[#F7E0BA]/70',
+    card: 'left-0 top-[12.708%] h-[82.072%] w-[24.18%]',
+    panel: 'top-[15.207%] h-[84.793%]',
+    phone: 'left-[23.56%] w-[53%]',
+  },
+  {
+    src: dailyPlanUrl,
+    title: section.tiles[1].title,
+    body: section.tiles[1].body,
+    panelClass: 'bg-[#F4C7BE]/60',
+    card: 'left-[25.273%] top-[17.7%] h-[81.921%] w-[24.18%]',
+    panel: 'top-[16.528%] h-[83.472%]',
+    phone: 'left-[23.4%] w-[53%]',
+  },
+  {
+    src: createAdvertisingUrl,
+    title: section.tiles[2].title,
+    body: section.tiles[2].body,
+    panelClass: 'bg-[#DBEEF0]',
+    card: 'left-[50.547%] top-[12.859%] h-[81.921%] w-[24.18%]',
+    panel: 'top-[15.05%] h-[84.949%]',
+    phone: 'left-[23.53%] w-[52.95%]',
+  },
+  {
+    src: analyticsUrl,
+    title: section.tiles[3].title,
+    body: section.tiles[3].body,
+    panelClass: 'bg-[#E8E8C9]/80',
+    card: 'left-[75.82%] top-[1.362%] h-[87.368%] w-[24.18%]',
+    panel: 'top-[20.346%] h-[79.654%]',
+    phone: 'left-[23.53%] w-[52.95%]',
+  },
+];
+---
+
+<section id="owner-app" class="bg-canvas">
+  <ul class="mx-auto flex max-w-[24rem] flex-col gap-16 px-8 py-16 lg:hidden">
+    {tiles.map((tile) => (
+      <li class="group relative">
+        <div class:list={['absolute inset-x-0 top-12 bottom-0 rounded-3xl', tile.panelClass]} />
+        <img
+          src={tile.src}
+          alt={tile.title}
+          width="375"
+          height="833"
+          class:list={[
+            'relative z-10 mx-auto w-[52%] origin-center will-change-[filter,scale]',
+            ease,
+            'motion-safe:group-hover:scale-[0.92] motion-safe:group-hover:blur-[2px]',
+          ]}
+        />
+        <div
+          class:list={[
+            'relative z-20 px-6 pt-6 pb-8 text-center origin-bottom',
+            ease,
+            'motion-safe:group-hover:-translate-y-3 motion-safe:group-hover:scale-[1.14]',
+          ]}
+        >
+          <h3 class="text-xl leading-[1.1] font-semibold tracking-[-0.02em] text-ink">
+            {tile.title}
+          </h3>
+          <p class="mt-2 text-sm leading-snug text-ink/70">{tile.body}</p>
+        </div>
+      </li>
+    ))}
+  </ul>
+
+  <div class="@container relative mx-auto hidden aspect-[1280/661] w-full max-w-[1280px] lg:block">
+    {tiles.map((tile) => (
+      <article class:list={['group absolute', tile.card]}>
+        <div class:list={['absolute inset-x-0 rounded-3xl', tile.panel, tile.panelClass]} />
+        <img
+          src={tile.src}
+          alt={tile.title}
+          width="375"
+          height="833"
+          class:list={[
+            'absolute top-0 z-10 aspect-[164/364] origin-center will-change-[filter,scale]',
+            tile.phone,
+            ease,
+            'motion-safe:group-hover:scale-[0.92] motion-safe:group-hover:blur-[2px]',
+          ]}
+        />
+        <div
+          class:list={[
+            'absolute inset-x-[8%] bottom-[8%] z-20 origin-bottom text-center',
+            ease,
+            'motion-safe:group-hover:-translate-y-3 motion-safe:group-hover:scale-[1.14]',
+          ]}
+        >
+          <h3 class="text-[2.05cqw] leading-[1.08] font-semibold tracking-[-0.02em] text-ink">
+            {tile.title}
+          </h3>
+          <p class="mt-[0.55cqw] text-[1.15cqw] leading-[1.35] text-ink/70">{tile.body}</p>
+        </div>
+      </article>
+    ))}
+  </div>
+</section>
